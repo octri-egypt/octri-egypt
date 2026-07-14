@@ -1,6 +1,11 @@
 # OCTRI Website — Project Notes
 
-Static marketing site for the Ocean Triathlon Team (OCTRI), deployed to GitHub Pages.
+Static marketing site for the Ocean Triathlon Team (OCTRI).
+
+- GitHub repo: **`octri-egypt/octri-egypt.github.io`** (this is a GitHub Pages **user/org site**,
+  so it is served at the **domain root**: **https://octri-egypt.github.io/**).
+- Remote URL: `https://github.com/octri-egypt/octri-egypt.github.io.git`.
+- Deployed via GitHub Actions to GitHub Pages (Settings → Pages → Source: GitHub Actions).
 
 ## Critical context: this is a STATIC SPA
 
@@ -36,10 +41,19 @@ must stay fully static and client-rendered.
 
 ## Base path (IMPORTANT)
 
-- Base path is set in `vite.config.ts` (`base`). It MUST match where Pages serves the site:
-  - Root domain repo (`<user>.github.io`) → `base: "/"`.
-  - Project repo (`<user>/<repo>`) → `base: "/<repo>/"` (otherwise assets 404).
-- Keep `sitemap.xml` and `robots.txt` URLs in sync with the deploy URL.
+- Base path is set in `vite.config.ts` (`base: "/"`). This is correct because the repo is a
+  `<user>.github.io` **user/org site** served at the domain root. **Do not change it to a subpath.**
+- If this were ever moved to a **project repo** (`<user>/<repo>`), you would set `base: "/<repo>/"`
+  and rebuild — otherwise assets 404. (That is not the case here.)
+- Keep `sitemap.xml` and `robots.txt` URLs pointing at `https://octri-egypt.github.io/`.
+
+## Deep-link / 404 behavior (expected)
+
+- Deep links like `/schedule` or `/about` return **HTTP 404 status** but still serve the app
+  (`#root` + JS bundle) via the `404.html` fallback, so the page boots and React Router renders it.
+  This is normal GitHub Pages SPA behavior (no server rewrites). Status code only; UX is fine.
+- To get a clean 200 on deep links you would need a **custom domain** with SPA-rewrite support;
+  not possible on the bare `*.github.io` static host.
 
 ## Common commands
 
