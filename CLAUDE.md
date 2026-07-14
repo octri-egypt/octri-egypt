@@ -27,6 +27,17 @@ must stay fully static and client-rendered.
 - `src/App.tsx` = layout (Header/Footer) + `<Outlet/>` + error view.
 - Pages live in `src/routes/*` as **default-exported** components. Page titles are set with the
   `useDocumentTitle` hook (not per-route meta).
+- Shared page header markup is in `src/components/PageHeader.tsx` (eyebrow/title/description).
+- Shared site constants (join form, contact info, social links, site URL) live in `src/lib/constants.ts`.
+  **All "Join Us" / "Join OCTRI" CTAs must use the `JOIN_FORM` constant — keep a single source of truth.**
+
+## Routes / page structure
+
+- `/` (Home), `/about`, `/services` (Programs), `/offers`, `/achievements`, `/events`,
+  `/partners`, `/fitness`, `/schedule`, `/contact`, `*` (404).
+- Header nav collapses dropdowns: **Team** → Achievements/Events/Partners,
+  **Training** → Fitness/Schedule. Dropdown hover uses a 200ms close-delay tolerance
+  (no margin gap — see `Header.tsx`); mobile uses a flat list.
 - `@` alias → `src/` (configured in `vite.config.ts`).
 - Images in `src/assets/` (fingerprinted into `dist/assets/` on build).
 - `public/` → `favicon.svg`, `manifest.json`, `robots.txt`, `sitemap.xml` (copied verbatim).
@@ -67,5 +78,10 @@ npm run lint
 
 ## Notes
 
-- "Join Us" CTAs link to a Google Form (kept as a `JOIN_FORM` constant in each file that uses it).
+- "Join Us" / "Join OCTRI" CTAs link to a Google Form via the `JOIN_FORM` constant in
+  `src/lib/constants.ts` (single source of truth). Footer also has a "Find Us on Maps" button
+  to a Google Maps short link (kept as `MAPS_URL` in `Footer.tsx`).
+- The reference site (octri-egypt.com) is the content source; this site preserves its own theme.
+  Reference `/blogs` is empty — no blog page was created. Fitness/offer descriptions were written
+  on-brand because the reference had none; swap in real program details + photos when available.
 - Images are full-resolution JPEG/PNG; convert to AVIF/WebP + `srcset` for better Lighthouse scores.

@@ -1,6 +1,7 @@
-import { Trophy, Target, Heart, Zap } from "lucide-react";
+import { Trophy, Target, Heart, Zap, Eye, Flag } from "lucide-react";
 import teamImg from "@/assets/team.jpg";
 import { SectionHeading } from "@/components/SectionHeading";
+import { PageHeader } from "@/components/PageHeader";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 const values = [
@@ -10,19 +11,28 @@ const values = [
   { icon: Zap, title: "Energy", desc: "Recharge from daily life through outdoor training and shared goals." },
 ];
 
+const principles = [
+  {
+    icon: Eye,
+    title: "Our Vision",
+    text: "To be Egypt's leading community for swimmers, cyclists, and runners — where athletes of every level train together, compete boldly, and grow stronger in body and mind.",
+  },
+  {
+    icon: Flag,
+    title: "Our Mission",
+    text: "To enable competitive professional and amateur athletes by building strength, fitness, and agility — helping them compete, enjoy being fit and strong, and escape the day-to-day pressures of life.",
+  },
+];
+
 export default function About() {
   useDocumentTitle("About — OCTRI Ocean Triathlon Team");
   return (
     <div className="pt-32 pb-16">
       <section className="container mx-auto px-6">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-primary font-semibold mb-4">
-            <span className="w-8 h-px bg-primary" /> About Us
-          </div>
-          <h1 className="font-display text-5xl md:text-7xl uppercase">
-            Built for those who <span className="text-gradient">refuse to quit.</span>
-          </h1>
-        </div>
+        <PageHeader
+          eyebrow="Who We Are"
+          title={<>Built for those who <span className="text-gradient">refuse to quit.</span></>}
+        />
 
         <div className="grid lg:grid-cols-2 gap-12 mt-16 items-start">
           <img src={teamImg} alt="OCTRI team" loading="lazy" width={1024} height={1024} className="rounded-2xl shadow-card w-full" />
@@ -42,6 +52,18 @@ export default function About() {
               Get outdoors and join us to build a strong YOU.
             </p>
           </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 mt-16">
+          {principles.map((p) => (
+            <div key={p.title} className="p-7 rounded-2xl bg-card border border-border shadow-card">
+              <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center mb-4">
+                <p.icon className="text-primary-foreground" size={22} />
+              </div>
+              <h3 className="font-display text-2xl uppercase mb-2">{p.title}</h3>
+              <p className="text-muted-foreground leading-relaxed">{p.text}</p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-24">

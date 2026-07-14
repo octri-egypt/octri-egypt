@@ -16,6 +16,31 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://octri-egypt.github.io/offers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://octri-egypt.github.io/achievements</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://octri-egypt.github.io/events</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://octri-egypt.github.io/partners</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://octri-egypt.github.io/fitness</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://octri-egypt.github.io/schedule</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>

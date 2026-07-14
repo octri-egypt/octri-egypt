@@ -1,43 +1,47 @@
-import { Mail, MapPin, Phone, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Phone, MessageCircle, ArrowRight } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 import { useDocumentTitle } from "@/hooks/use-document-title";
-
-const JOIN_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfzicOHqX6LkamRcFyRHbIZ3gbmTRE59wWYfCZcBcfRComlsw/viewform";
+import { JOIN_FORM, CONTACT, SOCIAL } from "@/lib/constants";
 
 export default function Contact() {
   useDocumentTitle("Contact OCTRI — Join the Team");
   return (
     <div className="pt-32 pb-16">
       <section className="container mx-auto px-6">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-primary font-semibold mb-4">
-            <span className="w-8 h-px bg-primary" /> Get In Touch
-          </div>
-          <h1 className="font-display text-5xl md:text-7xl uppercase">
-            Let's <span className="text-gradient">talk.</span>
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground">
-            Questions about programs, schedules, or joining the team? We're here.
-          </p>
-        </div>
+        <PageHeader
+          eyebrow="Get In Touch"
+          title={<>Let's <span className="text-gradient">talk.</span></>}
+          description="Questions about programs, schedules, or joining the team? We're here."
+        />
 
         <div className="mt-16 grid lg:grid-cols-2 gap-10">
           <div className="space-y-4">
             {[
-              { icon: MapPin, label: "Location", value: "Cairo, Egypt" },
-              { icon: Mail, label: "Email", value: "info@octri-egypt.com" },
-              { icon: Phone, label: "Phone", value: "+20 (0) 100 000 0000" },
-            ].map((c) => (
-              <div key={c.label} className="flex items-start gap-4 p-6 rounded-2xl bg-card border border-border">
-                <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                  <c.icon className="text-primary-foreground" size={20} />
+              { icon: MapPin, label: "Location", value: CONTACT.location, sub: CONTACT.locationDetail, href: undefined as string | undefined },
+              { icon: Mail, label: "Email", value: CONTACT.email, href: `mailto:${CONTACT.email}` },
+              { icon: Phone, label: "Phone", value: CONTACT.phoneDisplay, href: CONTACT.phoneHref },
+              { icon: MessageCircle, label: "WhatsApp", value: "Message us on WhatsApp", href: SOCIAL.whatsapp },
+            ].map((c) => {
+              const inner = (
+                <div className="flex items-start gap-4 p-6 rounded-2xl bg-card border border-border">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <c.icon className="text-primary-foreground" size={20} />
+                  </div>
+                  <div>
+                    <div className="text-xs uppercase tracking-widest text-muted-foreground">{c.label}</div>
+                    <div className="font-semibold text-lg mt-1">{c.value}</div>
+                    {c.sub && <div className="text-sm text-muted-foreground mt-0.5">{c.sub}</div>}
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">{c.label}</div>
-                  <div className="font-semibold text-lg mt-1">{c.value}</div>
-                </div>
-              </div>
-            ))}
+              );
+              return c.href ? (
+                <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer" className="block hover:border-primary/50 transition-smooth rounded-2xl">
+                  {inner}
+                </a>
+              ) : (
+                <div key={c.label}>{inner}</div>
+              );
+            })}
 
             <a
               href={JOIN_FORM}

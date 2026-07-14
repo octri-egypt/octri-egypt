@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { useDocumentTitle } from "@/hooks/use-document-title";
 
 const JOIN_FORM =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfzicOHqX6LkamRcFyRHbIZ3gbmTRE59wWYfCZcBcfRComlsw/viewform";
+  "https://docs.google.com/forms/d/e/1FAIpQLScYG77VfTWyoPcHmD6v5BTTmxFilQskBpwmDKYmyuEIG1qwQw/viewform";
 
 const programs = [
   { icon: Waves, title: "Swimming", desc: "Build endurance and stroke efficiency", days: "Sat · Mon · Wed", time: "5:30 AM", img: swimImg },
